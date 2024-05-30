@@ -12,21 +12,21 @@ namespace ITMO.ADO.NET124_28
         {
             static void Main(string[] args)
             {
-                using (SqlConnection conn = new SqlConnection("Integrated Security = SSPI; Persist Security Info = False; Initial Catalog = NORTHWND; Data Source = MSI\\MSSQLSERVER04"))
-                {
-                    conn.Open();
+            using (SqlConnection conn = new SqlConnection("Integrated Security = SSPI; Persist Security Info = False; Initial Catalog = NORTHWND; Data Source = MSI\\MSSQLSERVER04"))
+            {
+                conn.Open();
 
-                    using (SqlCommand cmd = new SqlCommand("SELECT [CustomerID],[CompanyName],[ContactName], [Phone] FROM [dbo].[Customers]", conn))
+                using (SqlCommand cmd = new SqlCommand("SELECT [CustomerID],[CompanyName],[ContactName], [Phone] FROM [dbo].[Customers]", conn))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        while (reader.Read())
                         {
-                            while (reader.Read())
-                            {
-                                Console.WriteLine(reader["CustomerID"]);
-                            }
+                            Console.WriteLine(reader["CustomerID"]);
                         }
                     }
                 }
+            }
             }
         }
 }
